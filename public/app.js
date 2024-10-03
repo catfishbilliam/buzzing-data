@@ -12,16 +12,8 @@ const pointLight = new THREE.PointLight(0xffffff, 1, 100);
 pointLight.position.set(10, 10, 10);
 scene.add(pointLight);
 
-// List of states (50 U.S. states in alphabetical order)
-const states = [
-  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-  'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-  'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-  'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-  'West Virginia', 'Wisconsin', 'Wyoming'
-];
+// List of states
+const states = ['California', 'Texas', 'New York', 'Florida', 'Illinois']; // Add as many states as needed
 
 const bees = [];
 const numBees = states.length; // Number of bees should match the number of states
@@ -68,9 +60,12 @@ function animate() {
 animate();
 
 // Fetch USDA APHIS Data
+const apiKey = 'YOUR_API_KEY_HERE'; // Replace with your actual API key
+
 async function fetchAphisData(state) {
+  const url = `https://api.aphis.usda.gov/some-endpoint?state=${state}&apikey=${apiKey}`;
   try {
-    const response = await fetch(`/api/state/${state}`);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
