@@ -1,39 +1,37 @@
-require('dotenv').config(); // Load the .env file
-const express = require('express');
-const fetch = require('node-fetch'); // Import fetch for Node.js
-const path = require('path');
+import 'dotenv/config';
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fetch from 'node-fetch';  // For making API requests to the USDA API
+
 const app = express();
 
-// Serve static files
-app.use(express.static('public'));
+// Handle __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Serve the index.html file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Fetch USDA APHIS API key from .env
-const apiKey = process.env.APHIS_API_KEY;
-
-// API route to fetch state data from USDA APHIS
+// API route to fetch USDA data based on the user's state selection
 app.get('/api/state/:state', async (req, res) => {
-  const state = req.params.state;
-  const url = `https://api.aphis.usda.gov/some-endpoint?state=${state}&apikey=${apiKey}`;
+    const apiKey = process.env.API_KEY;  // USDA API Key from .env file
+    const state = req.params.state;  // Extract state name from the URL parameter
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to fetch data from USDA APHIS');
+    // USDA Quick Stats API request with static filters and dynamic state name
+    const url = `https://quickstats.nass.usda.gov/api/api_GET/?key=${apiKey}&program=SURVEY&sector=ANIMALS%20%26%20PRODUCTS&group=SPECIALTY&commodity=HONEY&category=LOSS,COLONY%20COLLAPSE%20DISORDER&year=2023&agg_level_desc=STATE&state_name=${state}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        res.json(data);  // Send the data back to the client
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch data' });
     }
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 });
 
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

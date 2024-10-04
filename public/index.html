@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Bee Animation</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Swarm Visualization</title>
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="container"></div>
-  <script src="/app.js"></script> <!-- This will load your custom app.js with Three.js -->
+    <!-- The Babylon.js canvas where the scene will be rendered -->
+    <canvas id="renderCanvas"></canvas>
+    
+    <!-- Input for sorting states -->
+    <input type="text" id="sortInput" placeholder="Enter a state..." />
+
+    <!-- Babylon.js and app.js -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

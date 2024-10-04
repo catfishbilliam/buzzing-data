@@ -1,11 +1,15 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+/* Set the background color for the entire page or the canvas element */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightblue;  /* Light blue background */
+    overflow: hidden;  /* Prevent scrollbars from appearing */
 }
 
-#container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #f0f8ff; /* Light blue background */
+canvas {
+    display: flex;
+    width: 100vw;   /* Full viewport width */
+    height: 100vh;  /* Full viewport height */
+    background-color: lightblue;
 }
+
