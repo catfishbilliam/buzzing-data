@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hello Node!
 
 This project includes a Node.js server script and a web page that connects to it. The front-end page presents a form the visitor can use to submit a color name, sending the submitted value to the back-end API running on the server. The server returns info to the page that allows it to update the display with the chosen color. 🎨
@@ -42,3 +43,7 @@ ___Want a minimal version of this project to build your own Node.js app? Check o
 
 - Need more help? [Check out our Help Center](https://help.glitch.com/) for answers to any common questions.
 - Ready to make it official? [Become a paid Glitch member](https://glitch.com/pricing) to boost your app with private sharing, more storage and memory, domains and more.
+=======
+# buzzing-data
+Data visualization of APHIS  Colony Collapse Disorder by state data
+>>>>>>> 64859f79f704607e0cd98e4919c95968db3dea1b
